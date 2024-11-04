@@ -1,0 +1,106 @@
+# ninja log v6
+2293	2542	1730708223896856650	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+288	2293	1730708221891515892	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+288	1948	1730708221891831641	CMakeFiles/PlanMaster.dir/taskmanager.cpp.o	36d940ce102519d6
+287	2003	1730708221891348227	CMakeFiles/PlanMaster.dir/main.cpp.o	7ce05589ec31f48d
+288	940	1730708221891681642	CMakeFiles/PlanMaster.dir/task.cpp.o	f5c1f78d20db45c
+30	283	1730708221874976000	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+30	283	1730708221874976000	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+30	283	1730708221874976000	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+287	1987	1730708221891071103	CMakeFiles/PlanMaster.dir/PlanMaster_autogen/mocs_compilation.cpp.o	f809ffdf9ad535a6
+30	283	1730708221874976000	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+10	71	1730716849032862846	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+10	71	1730716849032862846	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+10	71	1730716849032862846	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+10	71	1730716849032862846	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+76	1492	1730716849098695620	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1492	1741	1730716850515376897	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+10	64	1730717091723233743	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+10	64	1730717091723233743	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+10	64	1730717091723233743	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+10	64	1730717091723233743	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+68	1520	1730717091780760217	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1520	1760	1730717093233188473	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+17	211	1730717473036118000	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+17	211	1730717473036118000	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+17	211	1730717473036118000	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+17	211	1730717473036118000	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+214	854	1730717473050169680	CMakeFiles/PlanMaster.dir/task.cpp.o	f5c1f78d20db45c
+214	1795	1730717473050315513	CMakeFiles/PlanMaster.dir/taskmanager.cpp.o	36d940ce102519d6
+213	1850	1730717473049627057	CMakeFiles/PlanMaster.dir/PlanMaster_autogen/mocs_compilation.cpp.o	f809ffdf9ad535a6
+213	1866	1730717473049860681	CMakeFiles/PlanMaster.dir/main.cpp.o	7ce05589ec31f48d
+214	2144	1730717473050019680	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+2144	2390	1730717474980163868	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+29	73	1730718452963155380	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+29	73	1730718452963155380	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+29	73	1730718452963155380	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+29	73	1730718452963155380	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+77	1667	1730718453011057834	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1668	1918	1730718454601745866	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+11	48	1730718479982952462	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+11	48	1730718479982952462	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+11	48	1730718479982952462	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+11	48	1730718479982952462	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+49	1288	1730718480021086983	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1288	1509	1730718481260538341	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+12	73	1730722417069731664	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+12	73	1730722417069731664	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+12	73	1730722417069731664	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+12	73	1730722417069731664	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+77	1657	1730722417134781192	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1657	1898	1730722418714906345	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+29	86	1730724567072233737	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+29	86	1730724567072233737	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+29	86	1730724567072233737	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+29	86	1730724567072233737	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+92	1766	1730724567134704700	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1766	2023	1730724568809114729	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+28	81	1730724668922672028	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+28	81	1730724668922672028	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+28	81	1730724668922672028	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+28	81	1730724668922672028	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+87	1605	1730724668981537350	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1605	1823	1730724670499335628	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+10	55	1730724718665402477	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+10	55	1730724718665402477	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+10	55	1730724718665402477	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+10	55	1730724718665402477	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+56	1304	1730724718711021871	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1304	1434	1730724719959456349	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+12	212	1730725189117143000	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+12	212	1730725189117143000	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+12	212	1730725189117143000	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+12	212	1730725189117143000	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+217	1548	1730725189134152344	CMakeFiles/PlanMaster.dir/PlanMaster_autogen/mocs_compilation.cpp.o	f809ffdf9ad535a6
+217	1550	1730725189134726096	CMakeFiles/PlanMaster.dir/taskmanager.cpp.o	36d940ce102519d6
+217	1581	1730725189134404303	CMakeFiles/PlanMaster.dir/main.cpp.o	7ce05589ec31f48d
+217	1815	1730725189134573262	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1815	2067	1730725190732753866	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+11	69	1730725346491623648	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+11	69	1730725346491623648	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+11	69	1730725346491623648	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+11	69	1730725346491623648	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+75	1628	1730725346555835491	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1628	1867	1730725348108853329	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+10	51	1730725540833299262	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+10	51	1730725540833299262	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+10	51	1730725540833299262	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+10	51	1730725540833299262	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+56	1434	1730725540879239781	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1434	1679	1730725542256613490	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+27	275	1730725837413786000	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+27	275	1730725837413786000	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+27	275	1730725837413786000	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+27	275	1730725837413786000	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+283	987	1730725837434601188	CMakeFiles/PlanMaster.dir/task.cpp.o	f5c1f78d20db45c
+283	1963	1730725837434751230	CMakeFiles/PlanMaster.dir/taskmanager.cpp.o	36d940ce102519d6
+282	1974	1730725837434040477	CMakeFiles/PlanMaster.dir/PlanMaster_autogen/mocs_compilation.cpp.o	f809ffdf9ad535a6
+282	2013	1730725837434286520	CMakeFiles/PlanMaster.dir/main.cpp.o	7ce05589ec31f48d
+282	2310	1730725837434455729	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+2310	2547	1730725839461864448	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
+31	77	1730726109636773991	PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+31	77	1730726109636773991	PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+31	77	1730726109636773991	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp	58f9b7a2c39f6282
+31	77	1730726109636773991	/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/mocs_compilation.cpp	58f9b7a2c39f6282
+84	1653	1730726109690449542	CMakeFiles/PlanMaster.dir/mainwindow.cpp.o	ec0f0317eea5ea43
+1653	1905	1730726111259503820	PlanMaster.app/Contents/MacOS/PlanMaster	364c5bee00ba24d6
