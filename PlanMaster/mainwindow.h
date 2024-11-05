@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QDate>
+#include <QDateTime>
 #include "taskmanager.h"
 
 namespace Ui { class MainWindow; }
@@ -17,11 +19,13 @@ private slots:
     void onAddTaskClicked();
     void onSortPriorityClicked();
     void onSortDateClicked();
+    void onDateSelected(const QDate &date);
 
 private:
     Ui::MainWindow *ui;
     TaskManager taskManager;
-    void updateTaskList();  // Aktualizuje wyświetlaną listę zadań
+    void updateTaskList();
+    void displayTasksForSelectedDate(const QDate &date);
 };
 
-#endif // MAINWINDOW_H
+#endif

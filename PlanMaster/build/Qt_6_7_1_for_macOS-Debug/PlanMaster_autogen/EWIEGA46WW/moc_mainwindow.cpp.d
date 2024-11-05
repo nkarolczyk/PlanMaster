@@ -93,6 +93,8 @@
   /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/sys/wait.h \
   /Users/nataliakarolczyk/Desktop/studia\ III\ semestr/PlanMaster/PlanMaster/task.h \
   /Users/nataliakarolczyk/Desktop/studia\ III\ semestr/PlanMaster/PlanMaster/taskmanager.h \
+  /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/QDate \
+  /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/QDateTime \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/q20functional.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/q20memory.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/q20type_traits.h \
@@ -111,6 +113,7 @@
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qbytearrayalgorithms.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qbytearraylist.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qbytearrayview.h \
+  /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qcalendar.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qchar.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qcompare.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qcompare_impl.h \
@@ -124,6 +127,7 @@
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qcontiguouscache.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qdarwinhelpers.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qdatastream.h \
+  /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qdatetime.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qdebug.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qendian.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qexceptionhandling.h \
@@ -143,6 +147,7 @@
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qlatin1stringview.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qline.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qlist.h \
+  /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qlocale.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qlogging.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qmalloc.h \
   /Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qmap.h \

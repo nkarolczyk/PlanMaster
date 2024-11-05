@@ -25,4 +25,4 @@ public:
     void setDueDate(std::time_t newDueDate);
 };
 
-#endif // TASK_H
+#endif

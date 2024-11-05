@@ -18,4 +18,4 @@ public:
     const std::vector<Task>& getTasks() const;        //pobiera listę zadań
 };
 
-#endif // TASKMANAGER_H
+#endif /
