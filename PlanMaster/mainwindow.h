@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QDate>
 #include <QDateTime>
+#include <QSplashScreen>
 #include "taskmanager.h"
 
 namespace Ui { class MainWindow; }
@@ -15,10 +16,13 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    void showSplashScreen(); //dodanie metody do wyświetlania splash screena
+
 private slots:
     void onAddTaskClicked();
     void onSortPriorityClicked();
     void onSortDateClicked();
+    void onExportTasksClicked(); // Nowy slot do eksportu zadań
     void onDateSelected(const QDate &date);
 
 private:
@@ -28,4 +32,4 @@ private:
     void displayTasksForSelectedDate(const QDate &date);
 };
 
-#endif
+#endif // MAINWINDOW_H

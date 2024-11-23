@@ -283,7 +283,8 @@
 		"/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/cmake/Qt6Widgets/Qt6QMacStylePluginTargets-relwithdebinfo.cmake",
 		"/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/cmake/Qt6Widgets/Qt6QMacStylePluginAdditionalTargetInfo.cmake",
 		"/Users/nataliakarolczyk/Qt/Tools/CMake/CMake.app/Contents/share/cmake-3.29/Modules/GNUInstallDirs.cmake",
-		"/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/cmake/Qt6/macos/Info.plist.app.in"
+		"/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/cmake/Qt6/macos/Info.plist.app.in",
+		"/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/resources.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster",
 	"CROSS_CONFIG" : false,

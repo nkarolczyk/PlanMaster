@@ -1184,6 +1184,9 @@
 			"path" : "/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/cmake/Qt6/macos/Info.plist.app.in"
 		},
 		{
+			"path" : "resources.qrc"
+		},
+		{
 			"isGenerated" : true,
 			"path" : "build/Qt_6_7_1_for_macOS-Debug/.qt/info_plist/PlanMaster/Info.plist"
 		}

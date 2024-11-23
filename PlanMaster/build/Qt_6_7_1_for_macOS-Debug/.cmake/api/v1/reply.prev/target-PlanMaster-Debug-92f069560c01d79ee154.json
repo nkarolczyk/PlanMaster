@@ -48,7 +48,7 @@
 			{
 				"command" : 3,
 				"file" : 1,
-				"line" : 23,
+				"line" : 28,
 				"parent" : 0
 			},
 			{
@@ -72,13 +72,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 64,
+				"line" : 70,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 47,
+				"line" : 53,
 				"parent" : 0
 			},
 			{
@@ -333,18 +333,19 @@
 				1,
 				2,
 				6,
-				8
+				7,
+				12
 			]
 		}
 	],
 	"dependencies" : 
 	[
 		{
-			"id" : "PlanMaster_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
-		},
-		{
 			"backtrace" : 0,
 			"id" : "PlanMaster_autogen::@6890427a1f51a3e7e1df"
+		},
+		{
+			"id" : "PlanMaster_autogen_timestamp_deps::@6890427a1f51a3e7e1df"
 		}
 	],
 	"id" : "PlanMaster::@6890427a1f51a3e7e1df",
@@ -451,7 +452,8 @@
 				1,
 				2,
 				6,
-				8
+				7,
+				12
 			]
 		},
 		{
@@ -460,8 +462,8 @@
 			[
 				3,
 				5,
-				7,
-				9
+				8,
+				10
 			]
 		},
 		{
@@ -469,14 +471,16 @@
 			"sourceIndexes" : 
 			[
 				4,
-				10
+				9,
+				11
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				11
+				13,
+				14
 			]
 		}
 	],
@@ -524,14 +528,19 @@
 		},
 		{
 			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "taskmanager.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
 			"path" : "taskmanager.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 4,
-			"compileGroupIndex" : 0,
-			"path" : "taskmanager.cpp",
-			"sourceGroupIndex" : 0
+			"path" : "resources.qrc",
+			"sourceGroupIndex" : 2
 		},
 		{
 			"backtrace" : 0,
@@ -547,8 +556,21 @@
 		},
 		{
 			"backtrace" : 0,
+			"compileGroupIndex" : 0,
+			"isGenerated" : true,
+			"path" : "build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/EWIEGA46WW/qrc_resources.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 0,
 			"isGenerated" : true,
 			"path" : "build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/timestamp.rule",
+			"sourceGroupIndex" : 3
+		},
+		{
+			"backtrace" : 0,
+			"isGenerated" : true,
+			"path" : "build/Qt_6_7_1_for_macOS-Debug/PlanMaster_autogen/EWIEGA46WW/qrc_resources.cpp.rule",
 			"sourceGroupIndex" : 3
 		}
 	],

@@ -4,28 +4,51 @@
 #include <QMessageBox>
 #include <QDateTime>
 #include <QDebug>
+#include <QSplashScreen>
+#include <QTimer>
+#include <QCoreApplication>
+#include <QFileDialog>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
 
-    //ustawienie aktualnej daty
+    // Wyświetlenie splash screena
+    showSplashScreen();
+
+    // Ustawienie aktualnej daty
     ui->dateInput->setDateTime(QDateTime::currentDateTime());
 
-    //połączenie przycisków
+    // Połączenie przycisków
     connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::onAddTaskClicked);
     connect(ui->sortDateButton, &QPushButton::clicked, this, &MainWindow::onSortDateClicked);
     connect(ui->sortPriorityButton, &QPushButton::clicked, this, &MainWindow::onSortPriorityClicked);
+    connect(ui->btnExportToTxt, &QPushButton::clicked, this, &MainWindow::onExportTasksClicked); // Połączenie przycisku eksportu
 
-    //połączenie kalendarza z funkcją onDateSelected
+    // Połączenie kalendarza z funkcją onDateSelected
     connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &MainWindow::onDateSelected);
 
-    //wyświetlenie aktualnej daty na starcie
+    // Wyświetlenie aktualnej daty na starcie
     onDateSelected(QDate::currentDate());
 }
 
 MainWindow::~MainWindow() {
     delete ui;
+}
+
+// Implementacja metody wyświetlającej splash screen
+void MainWindow::showSplashScreen() {
+    QSplashScreen *splash = new QSplashScreen(QPixmap(":/images/splash_image.png"));
+    if (QPixmap(":/images/splash_image.png").isNull()) {
+        qDebug() << "Nie można załadować obrazu splash screena!";
+        return;
+    }
+    splash->show();
+
+    QTimer::singleShot(3000, [splash, this]() {
+        splash->close();
+        this->show();
+    });
 }
 
 void MainWindow::onAddTaskClicked() {
@@ -45,6 +68,7 @@ void MainWindow::onAddTaskClicked() {
     taskManager.addTask(newTask);
 
     updateTaskList();
+    QMessageBox::information(this, "Sukces", "Zadanie zostało dodane pomyślnie!");
 }
 
 void MainWindow::onSortPriorityClicked() {
@@ -57,10 +81,24 @@ void MainWindow::onSortDateClicked() {
     updateTaskList();
 }
 
+void MainWindow::onExportTasksClicked() {
+    QString fileName = QFileDialog::getSaveFileName(this, "Zapisz plik tekstowy", "", "Pliki tekstowe (*.txt)");
+
+    if (!fileName.isEmpty()) {
+        taskManager.exportToTextFile(fileName);
+        QMessageBox::information(this, "Sukces", "Zadania zostały zapisane do pliku tekstowego!");
+    }
+}
+
 void MainWindow::updateTaskList() {
     ui->taskList->clear();
 
     const auto& tasks = taskManager.getTasks();
+
+    if (tasks.empty()) {
+        ui->taskList->addItem("Brak zadań do wyświetlenia.");
+        return;
+    }
 
     for (const auto& task : tasks) {
         QString taskString = QString("Tytuł: %1, Opis: %2, Priorytet: %3, Termin: %4")
@@ -72,16 +110,19 @@ void MainWindow::updateTaskList() {
     }
 }
 
-//funkcja wywoływana po wybraniu daty w kalendarzu
 void MainWindow::onDateSelected(const QDate &date) {
-    ui->dateInput->setDate(date); //ustawienie wybranej daty
-    displayTasksForSelectedDate(date); //wyświetla zadanie TYLKO na wybraną datę
+    ui->dateInput->setDate(date); // Ustawienie wybranej daty
+    displayTasksForSelectedDate(date); // Wyświetla zadanie TYLKO na wybraną datę
 }
 
-//wyświetla zadanie TYLKO na wybraną datę
 void MainWindow::displayTasksForSelectedDate(const QDate &date) {
     ui->taskList->clear();
     const auto& tasks = taskManager.getTasks();
+
+    if (tasks.empty()) {
+        ui->taskList->addItem("Brak zadań do wyświetlenia.");
+        return;
+    }
 
     for (const auto& task : tasks) {
         QDateTime taskDateTime = QDateTime::fromSecsSinceEpoch(task.getDueDate());

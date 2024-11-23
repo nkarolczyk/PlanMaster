@@ -98,6 +98,9 @@
  mdp:/Users/nataliakarolczyk/Desktop/studia III semestr/PlanMaster/PlanMaster/taskmanager.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/QDate
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/QDateTime
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/QFile
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/QJsonObject
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/QString
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/q20functional.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/q20memory.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/q20type_traits.h
@@ -117,6 +120,8 @@
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qbytearraylist.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qbytearrayview.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qcalendar.h
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qcborcommon.h
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qcborvalue.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qchar.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qcompare.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qcompare_impl.h
@@ -134,6 +139,8 @@
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qdebug.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qendian.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qexceptionhandling.h
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qfile.h
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qfiledevice.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qflags.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qfloat16.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qforeach.h
@@ -144,9 +151,12 @@
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qglobalstatic.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qhash.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qhashfunctions.h
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qiodevice.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qiodevicebase.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qiterable.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qiterator.h
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qjsonobject.h
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qjsonvalue.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qlatin1stringview.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qline.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qlist.h
@@ -171,6 +181,7 @@
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qprocessordetection.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qrect.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qrefcount.h
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qregularexpression.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qscopedpointer.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qscopeguard.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qset.h
@@ -212,7 +223,9 @@
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qtversionchecks.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qtypeinfo.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qtypes.h
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qurl.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qutf8stringview.h
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/quuid.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qvariant.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qvarlengtharray.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtCore.framework/Versions/A/Headers/qversiontagging.h
@@ -243,8 +256,10 @@
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtGui.framework/Versions/A/Headers/qtransform.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtGui.framework/Versions/A/Headers/qwindowdefs.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtWidgets.framework/Versions/A/Headers/QMainWindow
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtWidgets.framework/Versions/A/Headers/QSplashScreen
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qmainwindow.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qsizepolicy.h
+ mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qsplashscreen.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qtabwidget.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qtwidgets-config.h
  mdp:/Users/nataliakarolczyk/Qt/6.7.1/macos/lib/QtWidgets.framework/Versions/A/Headers/qtwidgetsexports.h
