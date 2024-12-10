@@ -2,34 +2,48 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QDate>
+#include <QListWidget>
 #include <QDateTime>
+#include <QSystemTrayIcon>
+#include <QTimer>
+#include "databasemanager.h"
 #include <QSplashScreen>
-#include "taskmanager.h"
+#include <QPixmap>
 
-namespace Ui { class MainWindow; }
+namespace Ui {
+class MainWindow;
+}
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(int userId, QWidget *parent = nullptr);
     ~MainWindow();
 
-    void showSplashScreen(); //dodanie metody do wyświetlania splash screena
+    void showSplashScreen();
 
 private slots:
+    //przyciski
     void onAddTaskClicked();
     void onSortPriorityClicked();
     void onSortDateClicked();
-    void onExportTasksClicked(); // Nowy slot do eksportu zadań
+    void onExportTasksClicked();
     void onDateSelected(const QDate &date);
+    void onRemoveTaskClicked();
+    void onCompleteTaskClicked();
+    void checkReminders();
 
 private:
-    Ui::MainWindow *ui;
-    TaskManager taskManager;
-    void updateTaskList();
-    void displayTasksForSelectedDate(const QDate &date);
+    Ui::MainWindow *ui;             //wskaźnik na interfejs użytkownika
+    QSystemTrayIcon *trayIcon;      //ikona w zasobniku systemowym
+    QTimer *reminderTimer;          //timer do przypomnień
+    int userId;                     //identyfikator użytkownika
+    DatabaseManager dbManager;      //obiekt do zarządzania bazą danych
+
+    void updateTaskList();                            //aktualizacja listy zadań
+    void showReminderNotification(const QString &message); //powiadomienia
+    void displayTasksForSelectedDate(const QDate &date); //zadania dla daty
 };
 
 #endif // MAINWINDOW_H

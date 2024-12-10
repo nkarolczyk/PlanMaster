@@ -5,22 +5,23 @@
 #include <vector>
 #include <QString>
 #include <QFile>
+#include <QDateTime>
 
 class TaskManager {
 private:
-    std::vector<Task> tasks; // lista zadań
+    std::vector<Task> tasks;
 
 public:
-    void addTask(const Task &task);                   // dodaje zadanie
-    void removeTask(const std::string &title);        // usuwa zadanie po tytule
-    void displayTasks() const;                        // wyświetla wszystkie zadania w konsoli
-    void sortByPriority();                            // sortuje zadania według priorytetu
-    void sortByDueDate();                             // sortuje zadania według terminu
-    const std::vector<Task>& getTasks() const;        // pobiera listę zadań
-
-    void saveToFile(const QString &filename);         // zapisuje zadania do pliku JSON
-    void loadFromFile(const QString &filename);       // wczytuje zadania z pliku JSON
-    void exportToTextFile(const QString &filename) const; // zapisuje zadania do pliku TXT
+    void addTask(const Task &task);
+    void removeTask(const std::string &title);
+    void markTaskAsCompleted(const std::string &title);
+    void displayTasks() const;
+    void sortByPriority();
+    void sortByDueDate();
+    const std::vector<Task>& getTasks() const;
+    void saveToFile(const QString &filename);
+    void loadFromFile(const QString &filename);
+    void exportToTextFile(const QString &filename) const;
 };
 
 #endif // TASKMANAGER_H
