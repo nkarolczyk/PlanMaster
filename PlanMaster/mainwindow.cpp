@@ -11,13 +11,10 @@ MainWindow::MainWindow(int userId, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), userId(userId) {
     ui->setupUi(this);
 
-    // Wyświetlenie splash screena
     showSplashScreen();
 
-    // Ustawienie aktualnej daty
     ui->dateInput->setDateTime(QDateTime::currentDateTime());
 
-    //połączenie guzików ze slotami
     connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::onAddTaskClicked);
     connect(ui->sortDateButton, &QPushButton::clicked, this, &MainWindow::onSortDateClicked);
     connect(ui->sortPriorityButton, &QPushButton::clicked, this, &MainWindow::onSortPriorityClicked);
@@ -41,12 +38,15 @@ void MainWindow::showSplashScreen() {
 void MainWindow::onAddTaskClicked() {
     QString title = ui->titleInput->text();
     QDateTime dueDate = ui->dateInput->dateTime();
-    int priority = ui->priorityInput->value();
+    int priority = ui->priorityInput->value(); // Pobranie wartości priorytetu
 
     if (title.isEmpty()) {
         QMessageBox::warning(this, "Błąd", "Tytuł zadania nie może być pusty.");
         return;
     }
+
+    qDebug() << "Próba dodania zadania dla userId:" << userId;
+    qDebug() << "Priorytet:" << priority;
 
     if (dbManager.addTask(userId, title, dueDate, priority)) {
         updateTaskList();
@@ -56,7 +56,9 @@ void MainWindow::onAddTaskClicked() {
     }
 }
 
-//JESZCZE NIE DZIAŁA - JEST BŁĄD
+
+
+
 
 void MainWindow::onRemoveTaskClicked() {
     QListWidgetItem *selectedItem = ui->taskList->currentItem();
@@ -66,14 +68,18 @@ void MainWindow::onRemoveTaskClicked() {
     }
 
     QString fullText = selectedItem->text();
-    QString title = fullText.split(" - Due: ").at(0);
-    title = title.split("] ").last();
+    QStringList parts = fullText.split(" - Due: ");
+    if (parts.size() > 1) {
+        QString title = parts.at(0).split("] ").last();
 
-    if (dbManager.removeTask(title)) {
-        updateTaskList();
-        QMessageBox::information(this, "Sukces", "Zadanie zostało usunięte.");
+        if (dbManager.removeTask(title)) {
+            updateTaskList();
+            QMessageBox::information(this, "Sukces", "Zadanie zostało usunięte.");
+        } else {
+            QMessageBox::warning(this, "Błąd", "Nie udało się usunąć zadania.");
+        }
     } else {
-        QMessageBox::warning(this, "Błąd", "Nie udało się usunąć zadania.");
+        QMessageBox::warning(this, "Błąd", "Nieprawidłowy format zadania.");
     }
 }
 
@@ -85,19 +91,23 @@ void MainWindow::onCompleteTaskClicked() {
     }
 
     QString fullText = selectedItem->text();
-    QString title = fullText.split(" - Due: ").at(0);
-    title = title.split("] ").last();
+    QStringList parts = fullText.split(" - Due: ");
+    if (parts.size() > 1) {
+        QString title = parts.at(0).split("] ").last();
 
-    if (dbManager.markTaskAsCompleted(title)) {
-        updateTaskList();
-        QMessageBox::information(this, "Sukces", "Zadanie zostało oznaczone jako zakończone.");
+        if (dbManager.markTaskAsCompleted(title)) {
+            updateTaskList();
+            QMessageBox::information(this, "Sukces", "Zadanie zostało oznaczone jako zakończone.");
+        } else {
+            QMessageBox::warning(this, "Błąd", "Nie udało się oznaczyć zadania jako zakończone.");
+        }
     } else {
-        QMessageBox::warning(this, "Błąd", "Nie udało się oznaczyć zadania jako zakończone.");
+        QMessageBox::warning(this, "Błąd", "Nieprawidłowy format zadania.");
     }
 }
 
 void MainWindow::onSortDateClicked() {
-    updateTaskList();  // Sortowanie po dacie
+    updateTaskList();
 }
 
 void MainWindow::onSortPriorityClicked() {
@@ -124,10 +134,11 @@ void MainWindow::onExportTasksClicked() {
 }
 
 void MainWindow::updateTaskList() {
-    ui->taskList->clear();
-    QList<QString> tasks = dbManager.getTasksForUser(userId);
+    ui->taskList->clear(); // Wyczyszczenie listy przed dodaniem nowych zadań
 
-    qDebug() << "Odświeżenie listy zadań. Ilość zadań:" << tasks.size();
+    QList<QString> tasks = dbManager.getTasksForUser(userId); // Pobranie zadań dla danego użytkownika
+
+    qDebug() << "Ilość zadań pobranych z bazy:" << tasks.size();
 
     if (tasks.isEmpty()) {
         ui->taskList->addItem("Brak zadań do wyświetlenia.");
@@ -138,8 +149,9 @@ void MainWindow::updateTaskList() {
     }
 }
 
+
 void MainWindow::checkReminders() {
-    //przypomnienia maja byc
+    // Funkcja przypomnień do zaimplementowania w przyszłości
 }
 
 void MainWindow::onDateSelected(const QDate &date) {
@@ -158,7 +170,6 @@ void MainWindow::displayTasksForSelectedDate(const QDate &date) {
 
     bool found = false;
     for (const QString &taskDescription : tasks) {
-        //"[Priority: X] Tytuł - Due: RRRR-MM-DDTHH:MM:SS"
         QString duePart = taskDescription.split("- Due: ").last();
         QDateTime taskDateTime = QDateTime::fromString(duePart, Qt::ISODate);
         if (taskDateTime.date() == date) {

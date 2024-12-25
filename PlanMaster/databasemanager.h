@@ -1,4 +1,3 @@
-// DatabaseManager.h
 #ifndef DATABASEMANAGER_H
 #define DATABASEMANAGER_H
 
@@ -9,30 +8,32 @@
 #include <QDateTime>
 #include <QList>
 #include <QCryptographicHash>
+#include <QDebug>
 
 class DatabaseManager {
 public:
     DatabaseManager();
-    bool addTask(int id, const QString &name, const QDateTime &dueDate, int priority);
 
+    //baza danych
     bool openDatabase();
     void closeDatabase();
-    int getUserId(const QString &username, const QString &password);
-    QString hashPassword(const QString &password);
 
+    //użytkownicy
     bool addUser(const QString &username, const QString &password);
     bool authenticate(const QString &username, const QString &password);
-    QList<QString> getTasksForUser(int userId);
-    bool exportToTextFile(int userId, const QString &fileName);
+    int getUserId(const QString &username, const QString &password);
+
+    //zadania
+    bool addTask(int userId, const QString &name, const QDateTime &dueDate, int priority);
     bool removeTask(const QString &title);
     bool markTaskAsCompleted(const QString &title);
+    QList<QString> getTasksForUser(int userId);
     QList<QString> getTasksSortedByPriority(int userId);
+    bool exportToTextFile(int userId, const QString &fileName);
 
-    bool sortTasksByDueDate(int userId);
-    bool sortTasksByPriority(int userId);
-    QList<QString> getTasksSortedByDate(int userId);
 private:
     QSqlDatabase db;
+    QString hashPassword(const QString &password);
 };
 
 #endif // DATABASEMANAGER_H

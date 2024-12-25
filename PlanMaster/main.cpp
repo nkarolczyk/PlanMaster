@@ -22,13 +22,12 @@ int main(int argc, char *argv[]) {
         if (dbManager.authenticate(username, password)) {
             int userId = dbManager.getUserId(username, password);
             if (userId != -1) {
-                //tworzenie okna kalendarzu jak uda sie zalogowac
-                MainWindow mainWindow(userId);
-                mainWindow.showSplashScreen(); //wywołanie ekranu powitalnego
+                MainWindow *mainWindow = new MainWindow(userId);
+                mainWindow->showSplashScreen();
 
-                QTimer::singleShot(3000, [&mainWindow]() { mainWindow.show(); }); //pokazanie okna po 3sek
+                QTimer::singleShot(3000, [mainWindow]() { mainWindow->show(); });
 
-                return app.exec(); //start aplikacji
+                return app.exec();
             } else {
                 qDebug() << "Błąd: Nie znaleziono identyfikatora użytkownika.";
             }
@@ -36,6 +35,8 @@ int main(int argc, char *argv[]) {
             qDebug() << "Błąd logowania: Nieprawidłowe dane logowania.";
         }
     }
+
+    dbManager.closeDatabase();
 
     return 0;
 }
