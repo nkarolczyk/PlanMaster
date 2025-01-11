@@ -34,6 +34,19 @@ private slots:
     void onCompleteTaskClicked();
     void checkReminders();
 
+    void on_btnAbout_clicked();
+
+    void on_btnHome_clicked();
+
+    void on_btnAnalytics_clicked();
+
+    void on_btnCalendar_clicked();
+
+    void on_btnPlanMaster_clicked();
+
+
+    void on_btnPlanMaster2_clicked();
+
 private:
     Ui::MainWindow *ui;             //wskaźnik na interfejs użytkownika
     QSystemTrayIcon *trayIcon;      //ikona w zasobniku systemowym

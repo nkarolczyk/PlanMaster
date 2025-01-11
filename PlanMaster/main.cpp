@@ -8,6 +8,26 @@
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
+    app.setStyleSheet("QMessageBox {"
+                      "    border-radius: 15px;"
+                      "    font: 700 25pt \"Optima\";"
+                      "    color: #000000;"
+                      "}"
+                      "QMessageBox QLabel {"
+                      "    color: #000000;"
+                      "}"
+                      "QMessageBox QPushButton {"
+                      "    color: #000000;"
+                      "    border: 2px solid #debe1f;"
+                      "    border-radius: 10px;"
+                      "    padding: 10px;"
+                      "    font: 700 20pt \"Optima\";"
+                      "    width: 100px;"
+                      "    height: 40px;"
+                      "    margin: 0 auto;"
+                      "}");
+
+
     DatabaseManager dbManager;
     if (!dbManager.openDatabase()) {
         qDebug() << "Nie udało się otworzyć bazy danych. Aplikacja zostanie zamknięta.";

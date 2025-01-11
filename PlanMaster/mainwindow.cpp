@@ -182,3 +182,41 @@ void MainWindow::displayTasksForSelectedDate(const QDate &date) {
         ui->taskList->addItem("Brak zadań dla wybranej daty.");
     }
 }
+
+void MainWindow::on_btnAbout_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->about);
+}
+
+
+
+void MainWindow::on_btnHome_clicked()
+{
+     ui->stackedWidget->setCurrentWidget(ui->home);
+}
+
+
+void MainWindow::on_btnAnalytics_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->analitics);
+}
+
+
+
+void MainWindow::on_btnCalendar_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->calendar);
+}
+
+
+void MainWindow::on_btnPlanMaster_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->home);
+}
+
+
+void MainWindow::on_btnPlanMaster2_clicked()
+{
+    ui->stackedWidget->setCurrentWidget(ui->home);
+}
+
