@@ -47,7 +47,7 @@ border: 2px solid #388087;
 border-radius: 8px;  </string>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="home">
      <widget class="QPushButton" name="addButton">
@@ -393,6 +393,26 @@ border: none;</string>
        <string>Dodaj zadanie</string>
       </property>
      </widget>
+     <widget class="QPushButton" name="btnDefaultView">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>480</y>
+        <width>241</width>
+        <height>41</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: rgba(111, 179, 184, 149);      
+border: 3px solid #6FB3B8;     
+border-radius: 8px;              
+font: 700 22pt &quot;Optima&quot;;
+color: rgb(38, 80, 87);</string>
+      </property>
+      <property name="text">
+       <string>POKAŻ WSZYSTKIE :)</string>
+      </property>
+     </widget>
     </widget>
     <widget class="QWidget" name="about">
      <widget class="QLabel" name="label_5">
@@ -430,27 +450,73 @@ color: #388087;
 border: none;</string>
       </property>
       <property name="text">
-       <string>ANALITICS</string>
+       <string>ANALYTICS</string>
       </property>
      </widget>
-     <widget class="QChartView" name="chartView" native="true">
+     <widget class="QTableWidget" name="tableWidgetAnalytics">
       <property name="geometry">
        <rect>
-        <x>50</x>
-        <y>130</y>
-        <width>231</width>
-        <height>351</height>
+        <x>420</x>
+        <y>240</y>
+        <width>256</width>
+        <height>191</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">/* Styl bazowy dla całego QTableWidget o obiekcie &quot;tableWidgetAnalytics&quot; */
+#tableWidgetAnalytics {
+    background-color: #f8f8f4; 
+    border: 3px solid #388087;
+    border-radius: 8px;
+    font: 700 18pt &quot;Optima&quot;;
+    color: rgb(38, 80, 87);      /* Kolor tekstu */
+    gridline-color: #CCCCCC;     /* Kolor linii siatki w tabeli */
+}
+
+/* Styl komórek (itemów) w środku tabeli */
+#tableWidgetAnalytics QTableView::item {
+    /* Jeśli chcesz np. inny margines w komórkach */
+    padding: 5px; 
+    /* Bez obramowania wokół każdej komórki: */
+    border: none;
+}
+
+/* Styl sekcji nagłówka (kolumn) – tzn. wiersz z etykietami &quot;Typ&quot;, &quot;Liczba&quot; */
+#tableWidgetAnalytics QHeaderView::section {
+    background-color: #388087; /* ciemniejszy turkus/niebieski */
+    color: #ffffff;           /* biały tekst */
+    border: 1px solid #ffffff;
+    font: 700 16pt &quot;Optima&quot;;
+    padding: 4px;
+}
+
+/* Opcjonalnie – styl nagłówka wierszy (jeśli go w ogóle używasz) */
+#tableWidgetAnalytics QHeaderView::section:vertical {
+    background-color: #388087;
+    color: #ffffff;
+}
+</string>
+      </property>
+      <property name="showGrid">
+       <bool>true</bool>
       </property>
      </widget>
      <widget class="QWidget" name="widgetChartContainer" native="true">
       <property name="geometry">
        <rect>
-        <x>400</x>
-        <y>230</y>
-        <width>120</width>
-        <height>80</height>
+        <x>30</x>
+        <y>120</y>
+        <width>361</width>
+        <height>471</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">background-color: #f8f8f4;      
+border: 3px solid #388087; 
+border-radius: 8px;                      
+font: 700 18pt &quot;Optima&quot;;
+color: rgb(38, 80, 87); 
+</string>
       </property>
      </widget>
     </widget>
@@ -612,14 +678,6 @@ color: #f6f6f2;</string>
    </widget>
   </widget>
  </widget>
- <customwidgets>
-  <customwidget>
-   <class>QChartView</class>
-   <extends>QWidget</extends>
-   <header>qchartview.h</header>
-   <container>1</container>
-  </customwidget>
- </customwidgets>
  <tabstops>
   <tabstop>priorityInput</tabstop>
   <tabstop>dateInput</tabstop>

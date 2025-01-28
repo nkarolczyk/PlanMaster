@@ -52,7 +52,8 @@ public:
     /**
      * Oznaczenie zadania jako ukończone - teraz po ID zamiast po tytule.
      */
-    bool markTaskAsCompleted(const QString &title);
+    bool markTaskAsCompleted(int userId, const QString &title);
+
 
 
     /**

@@ -18,10 +18,12 @@
 Q_DECLARE_METATYPE(Task)
 
 void MainWindow::updateAnalytics() {
+    syncTasksWithDatabase();
     int completedCount = 0;
     int ongoingCount = 0;
 
     auto tasks = taskManager->getTasks();
+    qDebug() << "Liczba zadań w systemie:" << tasks.size();
     for (const auto &task : tasks) {
         if (task.getIsCompleted()) {
             ++completedCount;
@@ -30,60 +32,87 @@ void MainWindow::updateAnalytics() {
         }
     }
 
-    //sprawdzenie czy mamy dane do wyświetlenia
-    if (completedCount == 0 && ongoingCount == 0) {
-        ui->labelAnalytics->setText("Brak danych do wyświetlenia.");
-        return;
-    } else {
-        ui->labelAnalytics->setText("Proporcja ukończonych i nieukończonych zadań");
+    qDebug() << "Ukończone zadania:" << completedCount;
+    qDebug() << "W toku zadania:" << ongoingCount;
+
+    if (!ui->widgetChartContainer->layout()) {
+        ui->widgetChartContainer->setLayout(new QVBoxLayout());
     }
 
-    //usunięcie poprzednich widgetów (aby nie nakładały się)
     QLayoutItem *child;
     while ((child = ui->widgetChartContainer->layout()->takeAt(0)) != nullptr) {
         delete child->widget();
         delete child;
     }
 
-    //NIE DZIALA NIC !!!
-
     QPieSeries *series = new QPieSeries();
     series->append("Ukończone", completedCount);
     series->append("W toku", ongoingCount);
 
+    // Ustawienie procentowych etykiet na wykresie
+    for (auto slice : series->slices()) {
+        slice->setLabel(QString("%1: %2").arg(slice->label()).arg(slice->value()));
+        slice->setLabelVisible(true);
+    }
+
+
     QChart *chart = new QChart();
     chart->addSeries(series);
     chart->setTitle("Proporcja ukończonych i nieukończonych zadań");
+    chart->legend()->setAlignment(Qt::AlignBottom);
 
     QChartView *chartView = new QChartView(chart);
     chartView->setRenderHint(QPainter::Antialiasing);
+    ui->widgetChartContainer->layout()->addWidget(chartView);
 
-    QVBoxLayout *layout = new QVBoxLayout();
-    layout->addWidget(chartView);
-    ui->widgetChartContainer->setLayout(layout);
+    ui->tableWidgetAnalytics->clear();
+    ui->tableWidgetAnalytics->setRowCount(2);
+    ui->tableWidgetAnalytics->setColumnCount(2);
+    ui->tableWidgetAnalytics->setHorizontalHeaderLabels({"Typ", "Liczba"});
+    ui->tableWidgetAnalytics->setItem(0, 0, new QTableWidgetItem("Ukończone"));
+    ui->tableWidgetAnalytics->setItem(0, 1, new QTableWidgetItem(QString::number(completedCount)));
+    ui->tableWidgetAnalytics->setItem(1, 0, new QTableWidgetItem("W toku"));
+    ui->tableWidgetAnalytics->setItem(1, 1, new QTableWidgetItem(QString::number(ongoingCount)));
 }
 
-void MainWindow::on_btnCompleteTask_clicked() {
+void MainWindow::on_btnCompleteTask_clicked()
+{
+    // 1. Sprawdź, czy zaznaczono jakieś zadanie na liście
     QListWidgetItem *selectedItem = ui->taskList->currentItem();
     if (!selectedItem) {
         QMessageBox::warning(this, "Błąd", "Wybierz zadanie do oznaczenia jako zakończone.");
         return;
     }
 
-    QVariant var = selectedItem->data(Qt::UserRole);
-    if (!var.isValid()) {
+    // 2. Pobierz dane zadania z UserRole
+    QString taskString = selectedItem->data(Qt::UserRole).toString();
+    if (taskString.isEmpty()) {
         QMessageBox::warning(this, "Błąd", "Nie udało się pobrać danych zadania.");
         return;
     }
 
-    Task task = var.value<Task>();
-    task.setIsCompleted(true);
-    taskManager->updateTask(task);
+    // 3. Rozdziel na części (format "tytuł|dueDate|priorytet|opis|completed")
+    QStringList parts = taskString.split("|");
+    if (parts.size() < 5) {
+        QMessageBox::warning(this, "Błąd", "Niepoprawny format danych zadania.");
+        return;
+    }
 
+    // 4. Wyciągnij tytuł (i ewentualnie userId, jeśli jest potrzebne)
+    QString title = parts[0];
+
+    // 5. Oznacz jako ukończone w bazie
+    bool success = dbManager.markTaskAsCompleted(userId, title);
+    if (success) {
+        QMessageBox::information(this, "Sukces", "Zadanie zostało oznaczone jako ukończone.");
+    } else {
+        QMessageBox::warning(this, "Błąd", "Nie udało się oznaczyć zadania jako ukończone.");
+    }
+
+    // 6. Odśwież wyświetlaną listę zadań i statystyki (wykres)
     updateTaskList();
-    QMessageBox::information(this, "Sukces", "Zadanie oznaczone jako zakończone.");
+    updateAnalytics();
 }
-
 
 MainWindow::MainWindow(int userId, QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow), userId(userId) {
@@ -105,10 +134,11 @@ MainWindow::MainWindow(int userId, QWidget *parent)
     connect(ui->sortPriorityButton, &QPushButton::clicked, this, &MainWindow::onSortPriorityClicked);
     connect(ui->btnExportToTxt, &QPushButton::clicked, this, &MainWindow::onExportTasksClicked);
     connect(ui->btnRemoveTask, &QPushButton::clicked, this, &MainWindow::onRemoveTaskClicked);
-    connect(ui->btnCompleteTask, &QPushButton::clicked, this, &MainWindow::onCompleteTaskClicked);
+    connect(ui->btnCompleteTask, &QPushButton::clicked, this, &MainWindow::on_btnCompleteTask_clicked);
     connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &MainWindow::onDateSelected);
-    connect(ui->btnCompleteTask, &QPushButton::clicked, this, &MainWindow::onCompleteTaskClicked);
     connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &MainWindow::onCalendarDateForAdding);
+    connect(ui->btnDefaultView, &QPushButton::clicked, this, &MainWindow::on_btnDefaultView_clicked);
+
 
 
     updateTaskList();
@@ -118,6 +148,12 @@ MainWindow::~MainWindow() {
     delete taskManager;
     delete ui;
 }
+
+void MainWindow::on_btnDefaultView_clicked()
+{
+    updateTaskList();
+}
+
 
 int MainWindow::findNextFreeRow(int column) {
     for (int row = 0; row < ui->tableWidgetWeek->rowCount(); ++row) {
@@ -257,25 +293,6 @@ void MainWindow::onRemoveTaskClicked() {
     updateAnalytics();
 }
 
-void MainWindow::onCompleteTaskClicked() {
-    QListWidgetItem *selectedItem = ui->taskList->currentItem();
-    if (!selectedItem) {
-        QMessageBox::warning(this, "Błąd", "Wybierz zadanie do oznaczenia jako zakończone.");
-        return;
-    }
-
-    QString taskTitle = selectedItem->text().split(" (").first();
-
-    if (dbManager.markTaskAsCompleted(taskTitle)) {
-        QMessageBox::information(this, "Sukces", "Zadanie oznaczone jako ukończone.");
-    } else {
-        QMessageBox::warning(this, "Błąd", "Nie udało się oznaczyć zadania jako ukończone.");
-    }
-
-    updateTaskList();
-    updateAnalytics(); //nie działa
-}
-
 
 void MainWindow::onSortDateClicked() {
     ui->taskList->clear();
@@ -346,7 +363,6 @@ void MainWindow::onExportTasksClicked() {
 
 void MainWindow::updateTaskList() {
     ui->taskList->clear();
-
     QList<QString> tasks = dbManager.getTasksForUser(userId);
 
     if (tasks.isEmpty()) {
@@ -356,15 +372,37 @@ void MainWindow::updateTaskList() {
 
     for (const QString &taskString : tasks) {
         QStringList parts = taskString.split("|");
-        if (parts.size() >= 4) {
+        if (parts.size() >= 5) {
             QString title = parts[0];
-            QString dueDate = QDateTime::fromString(parts[1], "yyyy-MM-dd HH:mm:ss").toString("yyyy-MM-dd HH:mm");
+            QString dueDate = QDateTime::fromString(parts[1], "yyyy-MM-dd HH:mm:ss")
+                                  .toString("yyyy-MM-dd HH:mm");
             QString priority = parts[2];
             QString description = parts[3];
+            bool isCompleted = (parts[4] == "1");
 
-            QString displayText = QString("%1 (Termin: %2, Priorytet: %3)").arg(title, dueDate, priority);
+            // Ułożenie wyświetlanego tekstu
+            QString displayText;
+            if (isCompleted) {
+                displayText = QString("%1 (ZAKOŃCZONE, Termin: %2, Priorytet: %3)")
+                                  .arg(title)
+                                  .arg(dueDate)
+                                  .arg(priority);
+            } else {
+                displayText = QString("%1 (Termin: %2, Priorytet: %3)")
+                                  .arg(title)
+                                  .arg(dueDate)
+                                  .arg(priority);
+            }
+
+            // Tworzymy QListWidgetItem o odpowiednim kolorze
             QListWidgetItem *item = new QListWidgetItem(displayText);
             item->setData(Qt::UserRole, taskString);
+
+            // Zmiana koloru czcionki (np. na ciemno-szary) jeśli zadanie jest ukończone
+            if (isCompleted) {
+                item->setForeground(Qt::darkGray);
+            }
+
             ui->taskList->addItem(item);
         } else {
             qWarning() << "Niepoprawny format danych zadania:" << taskString;
@@ -373,9 +411,8 @@ void MainWindow::updateTaskList() {
 }
 
 
-
 void MainWindow::onTaskClicked(QListWidgetItem *item) {
-   /* QString taskDisplay = item->text();
+    QString taskDisplay = item->text();
 
     // Rozdzielenie danych przy użyciu separatora "|"
     QList<QString> tasks = dbManager.getTasksForUser(userId);
@@ -399,7 +436,6 @@ void MainWindow::onTaskClicked(QListWidgetItem *item) {
     }
 
     QMessageBox::warning(this, "Błąd", "Nie znaleziono szczegółów zadania.");
-*/
 }
 
 
@@ -444,7 +480,7 @@ void MainWindow::on_btnAbout_clicked()
 
 void MainWindow::on_btnHome_clicked()
 {
-     ui->stackedWidget->setCurrentWidget(ui->home);
+    ui->stackedWidget->setCurrentWidget(ui->home);
     // Odłącz wszystkie poprzednie sygnały kalendarza
     disconnect(ui->calendarWidget, nullptr, nullptr, nullptr);
 
@@ -509,4 +545,3 @@ void MainWindow::syncTasksWithDatabase() {
 
     qDebug() << "Zsynchronizowano zadania z bazą danych.";
 }
-

@@ -33,7 +33,6 @@ private slots:
     void onExportTasksClicked();
     void onDateSelected(const QDate &date);
     void onRemoveTaskClicked();
-    void onCompleteTaskClicked();
     void checkReminders();
 
     void on_btnAbout_clicked();
@@ -75,6 +74,8 @@ private:
     int findNextFreeRow(int column);
     void updateAnalyticsView();
     void syncTasksWithDatabase();
+    void on_btnDefaultView_clicked();
+
 
 
 

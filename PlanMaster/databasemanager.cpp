@@ -98,14 +98,17 @@ bool DatabaseManager::removeTask(const QString &title) {
     return true;
 }
 
-bool DatabaseManager::markTaskAsCompleted(const QString &title) {
+bool DatabaseManager::markTaskAsCompleted(int userId, const QString &title)
+{
     if (!db.isOpen()) {
         qWarning() << "Baza danych nie jest otwarta.";
         return false;
     }
 
     QSqlQuery query(db);
-    query.prepare("UPDATE tasks SET completed = 1 WHERE title = :title");
+    //completed=1, ale TYLKO dla zadania z danym user_id i tytułem
+    query.prepare("UPDATE tasks SET completed = 1 WHERE user_id = :user_id AND title = :title");
+    query.bindValue(":user_id", userId);
     query.bindValue(":title", title);
 
     if (!query.exec()) {
@@ -130,7 +133,7 @@ bool DatabaseManager::authenticate(const QString &username, const QString &passw
         return false;
     }
 
-    return query.next(); // Sprawdź, czy istnieje dopasowany rekord
+    return query.next(); //czy istnieje dopasowany rekord
 }
 
 
