@@ -9,10 +9,12 @@
 #include "databasemanager.h"
 #include <QSplashScreen>
 #include <QPixmap>
+#include "taskmanager.h"
 
 namespace Ui {
 class MainWindow;
 }
+
 
 class MainWindow : public QMainWindow {
     Q_OBJECT
@@ -47,6 +49,16 @@ private slots:
 
     void on_btnPlanMaster2_clicked();
 
+    void onTaskClicked(QListWidgetItem *item);
+
+    void onCalendarDateForAdding(const QDate &date);
+
+    void checkDeadlines();
+    void displayWeeklyTasks(const QDate &startOfWeek);
+    void onTaskItemClicked(QListWidgetItem *item);
+    void on_btnCompleteTask_clicked();
+
+
 private:
     Ui::MainWindow *ui;             //wskaźnik na interfejs użytkownika
     QSystemTrayIcon *trayIcon;      //ikona w zasobniku systemowym
@@ -57,6 +69,15 @@ private:
     void updateTaskList();                            //aktualizacja listy zadań
     void showReminderNotification(const QString &message); //powiadomienia
     void displayTasksForSelectedDate(const QDate &date); //zadania dla daty
+    void updateAnalytics(); //analiza zadan
+
+    TaskManager *taskManager;
+    int findNextFreeRow(int column);
+    void updateAnalyticsView();
+    void syncTasksWithDatabase();
+
+
+
 };
 
 #endif // MAINWINDOW_H

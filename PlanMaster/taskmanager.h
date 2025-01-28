@@ -22,6 +22,13 @@ public:
     void saveToFile(const QString &filename);
     void loadFromFile(const QString &filename);
     void exportToTextFile(const QString &filename) const;
+    void updateTask(const Task &task);
+    void clearTasks();
+    QMap<QString, int> getTaskStatistics() const;
+
+
+
+
 };
 
 #endif // TASKMANAGER_H

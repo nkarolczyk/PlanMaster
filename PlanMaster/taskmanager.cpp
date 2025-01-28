@@ -9,7 +9,9 @@
 
 void TaskManager::addTask(const Task &task) {
     tasks.push_back(task);
-    qDebug() << "Dodano zadanie:" << QString::fromStdString(task.getTitle());
+    qDebug() << "Dodano zadanie:" << QString::fromStdString(task.getTitle())
+             << "Priorytet:" << task.getPriority()
+             << "Data:" << QDateTime::fromSecsSinceEpoch(task.getDueDate()).toString();
 }
 
 void TaskManager::removeTask(const std::string &title) {
@@ -36,20 +38,33 @@ void TaskManager::markTaskAsCompleted(const std::string &title) {
 }
 
 void TaskManager::displayTasks() const {
+    if (tasks.empty()) {
+        qDebug() << "Lista zadań jest pusta.";
+        return;
+    }
+
     for (const auto &task : tasks) {
         qDebug() << "Tytuł:" << QString::fromStdString(task.getTitle())
                  << "Priorytet:" << task.getPriority()
                  << "Data:" << QDateTime::fromSecsSinceEpoch(task.getDueDate()).toString()
-                 << "Zakończone:" << (task.isCompleted() ? "Tak" : "Nie");
+                 << "Zakończone:" << (task.getIsCompleted() ? "Tak" : "Nie");
     }
 }
 
 void TaskManager::sortByPriority() {
+    if (tasks.empty()) {
+        qDebug() << "Nie można posortować zadań - lista jest pusta.";
+        return;
+    }
+
+    qDebug() << "Rozpoczęto sortowanie zadań według priorytetu.";
     std::sort(tasks.begin(), tasks.end(), [](const Task &a, const Task &b) {
         return a.getPriority() > b.getPriority();
     });
-    qDebug() << "Zadania posortowane według priorytetu";
+    qDebug() << "Zakończono sortowanie zadań według priorytetu.";
+    displayTasks(); // Wyświetla zadania po sortowaniu
 }
+
 
 void TaskManager::sortByDueDate() {
     std::sort(tasks.begin(), tasks.end(), [](const Task &a, const Task &b) {
@@ -71,7 +86,8 @@ void TaskManager::saveToFile(const QString &filename) {
 
     QJsonArray jsonArray;
     for (const auto &task : tasks) {
-        jsonArray.append(task.toJson());
+        qDebug() << "Tytuł:" << QString::fromStdString(task.getTitle())
+                 << "Priorytet:" << task.getPriority();
     }
 
     QJsonDocument doc(jsonArray);
@@ -119,9 +135,42 @@ void TaskManager::exportToTextFile(const QString &filename) const {
         out << "Opis: " << QString::fromStdString(task.getDescription()) << "\n";
         out << "Priorytet: " << task.getPriority() << "\n";
         out << "Termin: " << QDateTime::fromSecsSinceEpoch(task.getDueDate()).toString() << "\n";
-        out << "Zakończone: " << (task.isCompleted() ? "Tak" : "Nie") << "\n";
+        out << "Zakończone: " << (task.getIsCompleted() ? "Tak" : "Nie") << "\n";
         out << "---------------------------------\n";
     }
     file.close();
     qDebug() << "Zadania zostały zapisane do pliku TXT:" << filename;
 }
+
+void TaskManager::updateTask(const Task &task) {
+    for (auto &t : tasks) {
+        if (t.getTitle() == task.getTitle()) {
+            t = task;
+            break;
+        }
+    }
+}
+
+void TaskManager::clearTasks() {
+    tasks.clear();
+    qDebug() << "Wyczyszczono listę zadań.";
+}
+
+QMap<QString, int> TaskManager::getTaskStatistics() const {
+    int completedCount = 0;
+    int ongoingCount = 0;
+
+    for (const auto &task : tasks) {
+        if (task.getIsCompleted()) {
+            ++completedCount;
+        } else {
+            ++ongoingCount;
+        }
+    }
+
+    QMap<QString, int> stats;
+    stats["Completed"] = completedCount;
+    stats["Ongoing"] = ongoingCount;
+    return stats;
+}
+
