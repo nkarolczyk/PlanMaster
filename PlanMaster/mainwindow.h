@@ -53,9 +53,24 @@ private slots:
     void onCalendarDateForAdding(const QDate &date);
 
     void checkDeadlines();
-    void displayWeeklyTasks(const QDate &startOfWeek);
     void onTaskItemClicked(QListWidgetItem *item);
     void on_btnCompleteTask_clicked();
+
+    void on_btnDefaultView_clicked();
+
+    void onCalendarDateSelected(const QDate &date);
+    void displayWeeklyTasks(const QDate &startOfWeek);
+    void setupCalendarView();
+
+
+    void on_btnAddTaskToDate_clicked();
+
+    void on_btnDefaultView_2_clicked();
+
+    void displayTasksForSelectedDate(const QDate &date);
+
+
+
 
 
 private:
@@ -67,16 +82,16 @@ private:
 
     void updateTaskList();                            //aktualizacja listy zadań
     void showReminderNotification(const QString &message); //powiadomienia
-    void displayTasksForSelectedDate(const QDate &date); //zadania dla daty
     void updateAnalytics(); //analiza zadan
 
     TaskManager *taskManager;
     int findNextFreeRow(int column);
     void updateAnalyticsView();
     void syncTasksWithDatabase();
-    void on_btnDefaultView_clicked();
+    void openTaskInCalendar(const Task &task);
 
-
+    void updateCalendarView();
+    void updateTaskListForDay(const QDate &date);
 
 
 };

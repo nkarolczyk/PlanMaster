@@ -13,9 +13,49 @@
 #include <QVBoxLayout>
 #include <QLabel>
 #include <QLayoutItem>
+#include <QDesktopServices>
+#include <QUrl>
+#include <QMovie>
 
 
 Q_DECLARE_METATYPE(Task)
+
+MainWindow::MainWindow(int userId, QWidget *parent)
+    : QMainWindow(parent), ui(new Ui::MainWindow), userId(userId) {
+    ui->setupUi(this);
+
+    showSplashScreen();
+    taskManager = new TaskManager();
+
+    reminderTimer = new QTimer(this);
+    connect(reminderTimer, &QTimer::timeout, this, &MainWindow::checkDeadlines);
+    reminderTimer->start(60000); // 60000 ms = 1 minuta
+
+
+    ui->dateInput->setDateTime(QDateTime::currentDateTime());
+
+    connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::onAddTaskClicked);
+    connect(ui->taskList, &QListWidget::itemClicked, this, &MainWindow::onTaskItemClicked);
+    connect(ui->sortDateButton, &QPushButton::clicked, this, &MainWindow::onSortDateClicked);
+    connect(ui->sortPriorityButton, &QPushButton::clicked, this, &MainWindow::onSortPriorityClicked);
+    connect(ui->btnExportToTxt, &QPushButton::clicked, this, &MainWindow::onExportTasksClicked);
+    connect(ui->btnRemoveTask, &QPushButton::clicked, this, &MainWindow::onRemoveTaskClicked);
+    connect(ui->btnCompleteTask, &QPushButton::clicked, this, &MainWindow::on_btnCompleteTask_clicked);
+    connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &MainWindow::onDateSelected);
+    connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &MainWindow::onCalendarDateForAdding);
+    connect(ui->btnDefaultView, &QPushButton::clicked, this, &MainWindow::on_btnDefaultView_clicked);
+    connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &MainWindow::onCalendarDateSelected);
+    connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &MainWindow::onDateSelected);
+
+    updateTaskList();
+
+}
+
+MainWindow::~MainWindow() {
+    delete taskManager;
+    delete ui;
+}
+
 
 void MainWindow::updateAnalytics() {
     syncTasksWithDatabase();
@@ -112,42 +152,9 @@ void MainWindow::on_btnCompleteTask_clicked()
     // 6. Odśwież wyświetlaną listę zadań i statystyki (wykres)
     updateTaskList();
     updateAnalytics();
+
 }
 
-MainWindow::MainWindow(int userId, QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow), userId(userId) {
-    ui->setupUi(this);
-
-    showSplashScreen();
-    taskManager = new TaskManager();
-
-    reminderTimer = new QTimer(this);
-    connect(reminderTimer, &QTimer::timeout, this, &MainWindow::checkDeadlines);
-    reminderTimer->start(60000); // 60000 ms = 1 minuta
-
-
-    ui->dateInput->setDateTime(QDateTime::currentDateTime());
-
-    connect(ui->addButton, &QPushButton::clicked, this, &MainWindow::onAddTaskClicked);
-    connect(ui->taskList, &QListWidget::itemClicked, this, &MainWindow::onTaskItemClicked);
-    connect(ui->sortDateButton, &QPushButton::clicked, this, &MainWindow::onSortDateClicked);
-    connect(ui->sortPriorityButton, &QPushButton::clicked, this, &MainWindow::onSortPriorityClicked);
-    connect(ui->btnExportToTxt, &QPushButton::clicked, this, &MainWindow::onExportTasksClicked);
-    connect(ui->btnRemoveTask, &QPushButton::clicked, this, &MainWindow::onRemoveTaskClicked);
-    connect(ui->btnCompleteTask, &QPushButton::clicked, this, &MainWindow::on_btnCompleteTask_clicked);
-    connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &MainWindow::onDateSelected);
-    connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &MainWindow::onCalendarDateForAdding);
-    connect(ui->btnDefaultView, &QPushButton::clicked, this, &MainWindow::on_btnDefaultView_clicked);
-
-
-
-    updateTaskList();
-}
-
-MainWindow::~MainWindow() {
-    delete taskManager;
-    delete ui;
-}
 
 void MainWindow::on_btnDefaultView_clicked()
 {
@@ -162,62 +169,67 @@ int MainWindow::findNextFreeRow(int column) {
         }
     }
 
+    // Jeśli nie ma wolnego miejsca, dodaj nowy wiersz
     ui->tableWidgetWeek->insertRow(ui->tableWidgetWeek->rowCount());
     return ui->tableWidgetWeek->rowCount() - 1;
 }
 
 
+
 void MainWindow::showSplashScreen() {
-    QSplashScreen *splash = new QSplashScreen(QPixmap(":/images/splash.png"));
-    splash->show();
-    QTimer::singleShot(2000, splash, &QSplashScreen::close);
+    // Ukrywamy MainWindow na czas splash screena
+    this->hide();
+
+    // Ustawienie dokładnych wymiarów MainWindow
+    this->resize(953, 671);
+
+    // Pobranie wymiarów ekranu
+    QRect screenGeometry = QApplication::primaryScreen()->geometry();
+
+    // Pobranie wymiarów MainWindow
+    QRect mainWindowGeometry = this->geometry();
+
+    // Ustawienie pozycji MainWindow na środku ekranu
+    int centerX = (screenGeometry.width() - mainWindowGeometry.width()) / 2;
+    int centerY = (screenGeometry.height() - mainWindowGeometry.height()) / 2;
+    this->move(centerX, centerY);
+
+    // Tworzenie QLabel jako splash screen o dokładnie tych samych wymiarach
+    QLabel *splashLabel = new QLabel(nullptr, Qt::SplashScreen | Qt::FramelessWindowHint);
+    splashLabel->setWindowFlags(Qt::WindowStaysOnTopHint | Qt::SplashScreen | Qt::FramelessWindowHint);
+    splashLabel->setGeometry(centerX, centerY, 953, 671);  // Dopasowanie do MainWindow
+
+    // Ustawienie animowanego GIF-a
+    QMovie *movie = new QMovie(":/images/splash.gif");
+    splashLabel->setMovie(movie);
+    splashLabel->setScaledContents(true);
+    movie->start();
+
+    splashLabel->show();
+
+    // Po 3 sekundach zamknięcie splash screena i pokazanie MainWindow
+    QTimer::singleShot(3000, splashLabel, [=]() {
+        splashLabel->close();
+        this->show();
+    });
 }
 
-void MainWindow::checkDeadlines()
-{
-    auto tasks = dbManager.getTasksForUser(userId);
 
+void MainWindow::checkDeadlines() {
+    auto tasks = taskManager->getTasks();
     QDateTime now = QDateTime::currentDateTime();
 
-    for (const auto &taskString : tasks) {
-        QStringList parts = taskString.split("|");
-        if (parts.size() < 5) continue;
+    for (const auto &task : tasks) {
+        if (!task.getIsCompleted()) {
+            QDateTime deadline = QDateTime::fromSecsSinceEpoch(task.getDueDate());
+            qint64 diff = now.secsTo(deadline);
 
-        bool isCompleted = (parts[4] == "1");
-        if (!isCompleted) {
-            QDateTime deadline = QDateTime::fromString(parts[1], Qt::ISODate);
-            // 1h przed terminem
-            if (deadline.addSecs(-3600) <= now && now < deadline) {
-                QMessageBox::information(this, "Przypomnienie",
-                                         QString("Zbliża się termin zadania: %1").arg(parts[0]));
+            if (diff <= 3600 && diff > 0) { // Powiadomienie na 1 godzinę przed
+                showReminderNotification(QString("Zbliża się termin zadania: %1").arg(QString::fromStdString(task.getTitle())));
             }
-        }
-    }
-}
-
-
-void MainWindow::displayWeeklyTasks(const QDate &startOfWeek)
-{
-    // W layoutcie mamy QTableWidget *tableWidgetWeek
-    // 7 kolumn – poniedziałek do niedzieli
-    // np. w constructorze: tableWidgetWeek->setColumnCount(7);
-
-    // Wyczyść aktualną tabelę
-    //tableWidgetWeek->clearContents();
-
-    auto tasks = taskManager->getTasks();
-
-    for (const auto& task : tasks) {
-        QDate d = QDateTime::fromSecsSinceEpoch(task.getDueDate()).date();
-
-        if (d >= startOfWeek && d < startOfWeek.addDays(7)) {
-            int dayIndex = d.dayOfWeek() - 1; // Monday=1 -> index 0
-            int row = findNextFreeRow(dayIndex);
-            QTableWidgetItem *item = new QTableWidgetItem(QString::fromStdString(task.getTitle()));
-
-
-            ui->tableWidgetWeek->setItem(row, dayIndex, item);
-
+            if (diff <= 0 && diff > -600) { // Powiadomienie, gdy termin właśnie minął (do 10 minut po)
+                showReminderNotification(QString("Termin minął: %1!").arg(QString::fromStdString(task.getTitle())));
+            }
         }
     }
 }
@@ -291,6 +303,7 @@ void MainWindow::onRemoveTaskClicked() {
 
     updateTaskList();
     updateAnalytics();
+
 }
 
 
@@ -496,16 +509,15 @@ void MainWindow::on_btnAnalytics_clicked() {
 }
 
 
-
-
-
-void MainWindow::on_btnCalendar_clicked()
-{
+void MainWindow::on_btnCalendar_clicked() {
     ui->stackedWidget->setCurrentWidget(ui->calendar);
-    disconnect(ui->calendarWidget, nullptr, nullptr, nullptr);
-    connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &MainWindow::onDateSelected);
 
+    QDate today = QDate::currentDate();
+    QDate startOfWeek = today.addDays(-today.dayOfWeek() + 1); //od poniedziału
+
+    displayWeeklyTasks(startOfWeek);
 }
+
 
 
 void MainWindow::on_btnPlanMaster_clicked()
@@ -523,6 +535,8 @@ void MainWindow::on_btnPlanMaster2_clicked()
 void MainWindow::onCalendarDateForAdding(const QDate &date) {
     ui->dateInput->setDate(date);
     ui->titleInput->setFocus();
+
+    displayTasksForSelectedDate(date);
 }
 
 void MainWindow::syncTasksWithDatabase() {
@@ -545,3 +559,148 @@ void MainWindow::syncTasksWithDatabase() {
 
     qDebug() << "Zsynchronizowano zadania z bazą danych.";
 }
+
+void MainWindow::openTaskInCalendar(const Task &task) {
+    QString calendarUrl = QString("https://calendar.google.com/calendar/render?action=TEMPLATE&text=%1&dates=%2/%3")
+                              .arg(QString::fromStdString(task.getTitle()))
+                              .arg(QDateTime::fromSecsSinceEpoch(task.getDueDate()).toString("yyyyMMddTHHmmss"))
+                              .arg(QDateTime::fromSecsSinceEpoch(task.getDueDate() + 3600).toString("yyyyMMddTHHmmss"));
+
+    QDesktopServices::openUrl(QUrl(calendarUrl));
+}
+
+void MainWindow::showReminderNotification(const QString &message) {
+    if (!trayIcon) {
+        trayIcon = new QSystemTrayIcon(this);
+        trayIcon->setIcon(QIcon(":/images/icon.png"));
+        trayIcon->show();
+    }
+
+    trayIcon->showMessage("Przypomnienie", message, QSystemTrayIcon::Information, 5000);
+}
+
+void MainWindow::onCalendarDateSelected(const QDate &date) {
+    ui->taskListForDay->clear();
+    QList<QString> tasks = dbManager.getTasksForDate(userId, date);
+
+    if (tasks.isEmpty()) {
+        ui->taskListForDay->addItem("Brak zadań dla wybranej daty.");
+        return;
+    }
+
+    for (const QString &task : tasks) {
+        QStringList parts = task.split("|");
+        if (parts.size() >= 4) {
+            QString title = parts[0];
+            QString dueDate = QDateTime::fromString(parts[1], "yyyy-MM-dd HH:mm:ss").toString("yyyy-MM-dd HH:mm");
+            QString priority = QString::number(parts[2].toInt());
+            QString description = parts[3];
+
+            QString displayText = QString("%1 (Priorytet: %2, Termin: %3)").arg(title, priority, dueDate);
+            QListWidgetItem *item = new QListWidgetItem(displayText);
+            item->setData(Qt::UserRole, task);
+            ui->taskListForDay->addItem(item);
+        }
+    }
+}
+
+void MainWindow::displayWeeklyTasks(const QDate &startOfWeek) {
+    ui->tableWidgetWeek->clearContents(); //wyczyść tabelę przed nowym załadowaniem danych
+
+    QList<QString> tasks = dbManager.getTasksForUser(userId); //pobierz wszystkie zadania użytkownika
+
+    for (const QString &task : tasks) {
+        QStringList parts = task.split("|");
+        if (parts.size() >= 5) {
+            QString title = parts[0];
+            QDate dueDate = QDateTime::fromString(parts[1], "yyyy-MM-dd HH:mm:ss").date();
+            int priority = parts[2].toInt();
+            bool isCompleted = (parts[4] == "1");
+
+            if (dueDate >= startOfWeek && dueDate < startOfWeek.addDays(7)) {
+                int column = dueDate.dayOfWeek() - 1; // Poniedziałek = 0, Niedziela = 6
+                int row = findNextFreeRow(column); //chyba to ma byc pierwsze wolne miejsce w tabeli
+
+                QTableWidgetItem *item = new QTableWidgetItem(title);
+                if (isCompleted) {
+                    item->setForeground(Qt::gray); //zakończone zadania
+                }
+                ui->tableWidgetWeek->setItem(row, column, item);
+            }
+        }
+    }
+}
+
+
+void MainWindow::on_btnAddTaskToDate_clicked() {
+    QString title = ui->titleInput->text().trimmed();
+    QString description = ui->descriptionInput->toPlainText().trimmed();
+    QDateTime dueDate = ui->calendarWidget->selectedDate().startOfDay();
+    int priority = ui->priorityInput->value();
+
+    if (title.isEmpty()) {
+        QMessageBox::warning(this, "Błąd", "Tytuł zadania nie może być pusty.");
+        return;
+    }
+
+    bool success = dbManager.addTask(userId, title, dueDate, priority, description, false);
+    if (success) {
+        QMessageBox::information(this, "Sukces", "Zadanie zostało dodane do kalendarza.");
+        QDate selectedDate = ui->calendarWidget->selectedDate();
+        QDate startOfWeek = selectedDate.addDays(-selectedDate.dayOfWeek() + 1);
+        displayWeeklyTasks(startOfWeek);
+
+    } else {
+        QMessageBox::warning(this, "Błąd", "Nie udało się dodać zadania.");
+    }
+}
+
+void MainWindow::on_btnDefaultView_2_clicked() {
+    ui->stackedWidget->setCurrentWidget(ui->home);
+    updateTaskList();
+}
+
+
+void MainWindow::updateTaskListForDay(const QDate &date) {
+    ui->taskListForDay->clear();
+    auto tasks = dbManager.getTasksForDate(userId, date);
+    for (const auto &task : tasks) {
+        ui->taskListForDay->addItem(task);
+    }
+}
+
+void MainWindow::setupCalendarView() {
+    ui->tableWidgetWeek->setColumnCount(7);
+    QStringList headers;
+    headers << "Pon" << "Wt" << "Śr" << "Czw" << "Pt" << "Sob" << "Niedz";
+    ui->tableWidgetWeek->setHorizontalHeaderLabels(headers);
+    ui->tableWidgetWeek->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+
+    connect(ui->calendarWidget, &QCalendarWidget::clicked, this, &MainWindow::onDateSelected);
+}
+
+void MainWindow::displayTasksForSelectedDate(const QDate &date) {
+    ui->taskList->clear();
+
+    QList<QString> tasks = dbManager.getTasksForDate(userId, date);
+
+    if (tasks.isEmpty()) {
+        ui->taskList->addItem("Brak zadań dla wybranej daty.");
+        return;
+    }
+
+    for (const QString &task : tasks) {
+        QStringList parts = task.split("|");
+        if (parts.size() >= 4) {
+            QString title = parts[0];
+            QString dueDate = QDateTime::fromString(parts[1], "yyyy-MM-dd HH:mm:ss").toString("yyyy-MM-dd HH:mm");
+            QString priority = QString::number(parts[2].toInt());
+            QString description = parts[3];
+
+            QString displayText = QString("%1 (Priorytet: %2, Termin: %3)").arg(title, priority, dueDate);
+            ui->taskList->addItem(displayText);
+        }
+    }
+}
+
+

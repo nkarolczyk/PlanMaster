@@ -44,7 +44,7 @@ set(PROJECT_SOURCES
     registerdialog.ui
     databasemanager.h
     databasemanager.cpp
-    resources.qrc
+    ${RESOURCE_FILES}
 )
 
 # Tworzenie pliku wykonywalnego
@@ -52,6 +52,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(PlanMaster
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        resources.qrc
     )
 else()
     if(ANDROID)

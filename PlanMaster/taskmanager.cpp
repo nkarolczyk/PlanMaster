@@ -174,3 +174,15 @@ QMap<QString, int> TaskManager::getTaskStatistics() const {
     return stats;
 }
 
+QList<Task> TaskManager::getTasksForWeek(int userId, const QDate &startOfWeek) {
+    QList<Task> weeklyTasks;
+    auto allTasks = getTasks(); // Pobieramy wszystkie zadania
+
+    for (const auto &task : allTasks) {
+        QDate taskDate = QDateTime::fromSecsSinceEpoch(task.getDueDate()).date();
+        if (taskDate >= startOfWeek && taskDate < startOfWeek.addDays(7)) {
+            weeklyTasks.append(task);
+        }
+    }
+    return weeklyTasks;
+}

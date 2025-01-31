@@ -524,8 +524,8 @@ color: rgb(38, 80, 87);
      <widget class="QLabel" name="label_4">
       <property name="geometry">
        <rect>
-        <x>190</x>
-        <y>125</y>
+        <x>80</x>
+        <y>50</y>
         <width>221</width>
         <height>101</height>
        </rect>
@@ -539,14 +539,95 @@ border: none;</string>
        <string>CALENDAR</string>
       </property>
      </widget>
-     <widget class="QTableWidget" name="tableWidgetWeek">
+     <widget class="QListWidget" name="taskListForDay">
       <property name="geometry">
        <rect>
-        <x>170</x>
-        <y>280</y>
+        <x>50</x>
+        <y>240</y>
         <width>256</width>
         <height>192</height>
        </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 700 23pt &quot;Optima&quot;;
+color: #6fb3b8;
+border: 2px solid #6fb3b8; 
+border-radius: 8px;  </string>
+      </property>
+     </widget>
+     <widget class="QTableWidget" name="tableWidgetWeek">
+      <property name="geometry">
+       <rect>
+        <x>320</x>
+        <y>360</y>
+        <width>381</width>
+        <height>192</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 700 23pt &quot;Optima&quot;;
+color: #6fb3b8;
+border: 2px solid #6fb3b8; 
+border-radius: 8px;  </string>
+      </property>
+      <property name="rowCount">
+       <number>5</number>
+      </property>
+      <property name="columnCount">
+       <number>7</number>
+      </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <row/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+      <column/>
+     </widget>
+     <widget class="QPushButton" name="btnAddTaskToDate">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>150</y>
+        <width>281</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 700 23pt &quot;Optima&quot;;
+color: #6fb3b8;
+border: 2px solid #6fb3b8; 
+border-radius: 8px;  </string>
+      </property>
+      <property name="text">
+       <string>zadanie do wybranego dnia</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="btnDefaultView_2">
+      <property name="geometry">
+       <rect>
+        <x>400</x>
+        <y>200</y>
+        <width>271</width>
+        <height>32</height>
+       </rect>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">font: 700 23pt &quot;Optima&quot;;
+color: #6fb3b8;
+border: 2px solid #6fb3b8; 
+border-radius: 8px;  </string>
+      </property>
+      <property name="text">
+       <string>powrót do listy zadań</string>
       </property>
      </widget>
     </widget>

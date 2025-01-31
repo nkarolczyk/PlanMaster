@@ -25,6 +25,8 @@ public:
     void updateTask(const Task &task);
     void clearTasks();
     QMap<QString, int> getTaskStatistics() const;
+    QList<Task> getTasksForWeek(int userId, const QDate &startOfWeek);
+
 
 
 
