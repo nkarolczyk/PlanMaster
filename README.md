@@ -1,5 +1,7 @@
-# PlanMaster
-Ostateczna zmiana Readme: 03.02.2025r
+# PlanMaster  
+
+Ostateczna zmiana Readme: 03.02.2025r  
+
 PlanMaster to nowoczesna aplikacja do zarządzania zadaniami i planowania tygodniowego, pełniąca rolę wirtualnego asystenta. Została stworzona, aby pomóc użytkownikom w organizowaniu obowiązków, przypominaniu o terminach oraz umożliwieniu efektywnego planowania. Dzięki intuicyjnemu interfejsowi graficznemu w Qt, użytkownicy mogą dodawać, edytować i sortować zadania według priorytetów oraz monitorować pozostały czas do ich realizacji. Program obsługuje automatyczne powiadomienia, zapewniając pełną kontrolę nad organizacją codziennych i tygodniowych zadań.
 
 
@@ -83,7 +85,7 @@ Wymagania
 * CMake >= 3.16
 * Kompilator obsługujący C++17
 
-##Kroki instalacji 
+Kroki instalacji  
 Sklonuj repozytorium:
 ```bash
 git clone https://github.com/user/PlanMaster.git
