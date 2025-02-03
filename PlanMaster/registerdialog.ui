@@ -53,6 +53,9 @@ color: rgb(38, 80, 87);
 
 </string>
    </property>
+   <property name="echoMode">
+    <enum>QLineEdit::Password</enum>
+   </property>
   </widget>
   <widget class="QPushButton" name="registerButton">
    <property name="geometry">

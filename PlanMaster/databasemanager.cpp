@@ -11,9 +11,9 @@
 QString DatabaseManager::hashPassword(const QString &password) {
     QByteArray passwordBytes = password.toUtf8();
     QByteArray hashedPassword = QCryptographicHash::hash(passwordBytes, QCryptographicHash::Sha256);
-    return QString(hashedPassword.toHex());
-
+    return QString(hashedPassword.toHex()); //system szesnastkowy
 }
+
 
 DatabaseManager::DatabaseManager() {
     if (QSqlDatabase::contains("unique_connection_name")) {
@@ -121,30 +121,33 @@ bool DatabaseManager::markTaskAsCompleted(int userId, const QString &title)
 bool DatabaseManager::authenticate(const QString &username, const QString &password) {
     if (!openDatabase()) return false;
 
-    QString hashedPassword = hashPassword(password);
+    QString hashedPassword = hashPassword(password); // Hashujemy podane przez użytkownika hasło
 
     QSqlQuery query(db);
     query.prepare("SELECT id FROM users WHERE username = :username AND password = :password");
     query.bindValue(":username", username);
-    query.bindValue(":password", hashedPassword);
+    query.bindValue(":password", hashedPassword); // Porównujemy zahashowane hasło z bazą
 
     if (!query.exec()) {
         qWarning() << "Query execution failed:" << query.lastError().text();
         return false;
     }
 
-    return query.next(); //czy istnieje dopasowany rekord
+    return query.next(); // Jeśli istnieje użytkownik z tymi danymi, zwróci true
 }
+
 
 
 
 int DatabaseManager::getUserId(const QString &username, const QString &password) {
     if (!openDatabase()) return -1;
 
+    QString hashedPassword = hashPassword(password); // Hashujemy podane hasło
+
     QSqlQuery query(db);
     query.prepare("SELECT id FROM users WHERE username = :username AND password = :password");
     query.bindValue(":username", username);
-    query.bindValue(":password", hashPassword(password));
+    query.bindValue(":password", hashedPassword);
 
     if (query.exec() && query.next()) {
         return query.value(0).toInt();
@@ -153,6 +156,7 @@ int DatabaseManager::getUserId(const QString &username, const QString &password)
         return -1;
     }
 }
+
 
 bool DatabaseManager::addUser(const QString &username, const QString &password) {
     if (!openDatabase()) return false;
@@ -172,6 +176,7 @@ bool DatabaseManager::addUser(const QString &username, const QString &password) 
         return false;
     }
 
+    // HASHUJEMY HASŁO PRZED ZAPISANIEM 🚀
     QString hashedPassword = hashPassword(password);
 
     QSqlQuery insertQuery(db);
@@ -324,17 +329,14 @@ bool DatabaseManager::openDatabase() {
         qWarning() << "Nieprawidłowe połączenie z bazą danych.";
         return false;
     }
-
-    if (!db.isOpen()) {
-        if (!db.open()) {
-            qWarning() << "Nie udało się otworzyć bazy danych:" << db.lastError().text();
-            return false;
-        }
+    if (!db.isOpen() && !db.open()) {
+        qWarning() << "Nie udało się otworzyć bazy danych:" << db.lastError().text();
+        return false;
     }
-
     qDebug() << "Baza danych otwarta pomyślnie.";
     return true;
 }
+
 
 
 void DatabaseManager::closeDatabase() {
@@ -374,8 +376,9 @@ QList<QString> DatabaseManager::getTasksForDate(int userId, const QDate &date) {
     if (!db.isOpen()) return tasks;
 
     QSqlQuery query(db);
+    // Używamy substr(dueDate,1,10) aby pobrać część odpowiadającą dacie ("yyyy-MM-dd")
     query.prepare("SELECT title, dueDate, priority, description FROM tasks "
-                  "WHERE user_id = :user_id AND DATE(dueDate) = :dueDate");
+                  "WHERE user_id = :user_id AND date(dueDate) = date(:dueDate)");
     query.bindValue(":user_id", userId);
     query.bindValue(":dueDate", date.toString("yyyy-MM-dd"));
 
@@ -394,5 +397,5 @@ QList<QString> DatabaseManager::getTasksForDate(int userId, const QDate &date) {
     }
 
     return tasks;
-
 }
+

@@ -8,7 +8,7 @@
 int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
 
-    app.setWindowIcon(QIcon(":/images/icon.png"));
+    app.setWindowIcon(QIcon(":/icon.png"));
 
     app.setStyleSheet("QMessageBox {"
                       "    border-radius: 15px;"

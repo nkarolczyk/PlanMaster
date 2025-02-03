@@ -1,6 +1,6 @@
 <RCC>
     <qresource prefix="/images">
-        <file>icon.png</file>
         <file>splash.gif</file>
+        <file>icon.png</file>
     </qresource>
 </RCC>

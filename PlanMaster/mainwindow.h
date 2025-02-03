@@ -63,7 +63,7 @@ private slots:
     void setupCalendarView();
 
 
-    void on_btnAddTaskToDate_clicked();
+    void on_btnUpdate_clicked();
 
     void on_btnDefaultView_2_clicked();
 
