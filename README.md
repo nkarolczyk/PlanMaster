@@ -23,14 +23,14 @@ CMake - system budowania projektu
 
 
 STRUKTURA PROJEKTU:  
-```bash hmain.cpp ``` - punkt wejścia do aplikacji  
-```bash mainwindow.h/.cpp ``` - główne okno aplikacji  
-```bash logindialog.h/.cpp ``` - okno logowania użytkownika  
-```bash registerdialog.h/.cpp ``` - okno rejestracji użytkownika  
-```bash databasemanager.h/.cpp ``` - zarządzanie bazą danych SQLite  
-```bash task.h/.cpp ``` - klasa reprezentująca pojedyncze zadanie  
-```bash taskmanager.h/.cpp ``` - klasa zarządzająca zadaniami  
-```bash CMakeLists.txt ``` - konfiguracja budowania projektu  
+``` main.cpp ``` - punkt wejścia do aplikacji  
+``` mainwindow.h/.cpp ``` - główne okno aplikacji  
+``` logindialog.h/.cpp ``` - okno logowania użytkownika  
+``` registerdialog.h/.cpp ``` - okno rejestracji użytkownika  
+``` databasemanager.h/.cpp ``` - zarządzanie bazą danych SQLite  
+``` task.h/.cpp ``` - klasa reprezentująca pojedyncze zadanie  
+``` taskmanager.h/.cpp ``` - klasa zarządzająca zadaniami  
+``` CMakeLists.txt ``` - konfiguracja budowania projektu  
 
 
 HARMONOGRAM PROJEKTU (ostateczna wersja)  
