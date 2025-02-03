@@ -83,25 +83,23 @@ Wymagania
 * CMake >= 3.16
 * Kompilator obsługujący C++17
 
-Kroki instalacji 
-
-
+##Kroki instalacji 
 Sklonuj repozytorium:
-
+```bash
 git clone https://github.com/user/PlanMaster.git
 cd PlanMaster
-
+```
 Stwórz katalog build i przejdź do niego:
-
+```bash
 mkdir build && cd build
-
+```
 Skonfiguruj projekt i skompiluj:
-
+```bash
 cmake ..
 make
-
+```
 Uruchom aplikację:
-
+```bash
 ./PlanMaster
-
+```
 
