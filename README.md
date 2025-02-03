@@ -15,77 +15,77 @@ FUNKCJE:
 * Generowanie raportów i statystyk dotyczących zadań.
 
 
-WYKORZYSTANE TECHNOLOGIE:
-C++ - główny język programowania
-Qt6 (Widgets, Sql, Charts) - framework do budowy interfejsu graficznego i obsługi bazy danych
-SQLite - baza danych do przechowywania zadań i użytkowników
-CMake - system budowania projektu
+WYKORZYSTANE TECHNOLOGIE:  
+C++ - główny język programowania  
+Qt6 (Widgets, Sql, Charts) - framework do budowy interfejsu graficznego i obsługi bazy danych  
+SQLite - baza danych do przechowywania zadań i użytkowników  
+CMake - system budowania projektu  
 
 
-STRUKTURA PROJEKTU:
-main.cpp - punkt wejścia do aplikacji
-mainwindow.h/.cpp - główne okno aplikacji
-logindialog.h/.cpp - okno logowania użytkownika
-registerdialog.h/.cpp - okno rejestracji użytkownika
-databasemanager.h/.cpp - zarządzanie bazą danych SQLite
-task.h/.cpp - klasa reprezentująca pojedyncze zadanie
-taskmanager.h/.cpp - klasa zarządzająca zadaniami
-CMakeLists.txt - konfiguracja budowania projektu
+STRUKTURA PROJEKTU:  
+```bash hmain.cpp ``` - punkt wejścia do aplikacji  
+```bash mainwindow.h/.cpp ``` - główne okno aplikacji  
+```bash logindialog.h/.cpp ``` - okno logowania użytkownika  
+```bash registerdialog.h/.cpp ``` - okno rejestracji użytkownika  
+```bash databasemanager.h/.cpp ``` - zarządzanie bazą danych SQLite  
+```bash task.h/.cpp ``` - klasa reprezentująca pojedyncze zadanie  
+```bash taskmanager.h/.cpp ``` - klasa zarządzająca zadaniami  
+```bash CMakeLists.txt ``` - konfiguracja budowania projektu  
 
 
-HARMONOGRAM PROJEKTU (ostateczna wersja)
+HARMONOGRAM PROJEKTU (ostateczna wersja)  
 Tydzień 1 (do 21.10) – Planowanie i Projektowanie
 * Określenie wymagań funkcjonalnych.
 * Stworzenie repozytorium na GitHubie.
 * Zaprojektowanie struktury projektu i planu plików (np. klasy, GUI, zasoby).
 
-Tydzień 2 (do 28.10) – Tworzenie Podstawowych Klas
+Tydzień 2 (do 28.10) – Tworzenie Podstawowych Klas  
 * Implementacja klasy Task przechowującej szczegóły zadań (tytuł, opis, priorytet, data).
 * Implementacja klasy TaskManager zarządzającej listą zadań.
 
-Tydzień 3 (do 04.11) – Implementacja GUI – Widok główny
+Tydzień 3 (do 04.11) – Implementacja GUI – Widok główny  
 * Stworzenie głównego okna aplikacji w Qt, wyświetlającego listę zadań.
 * Podstawowa funkcjonalność dodawania i edycji zadań przez GUI.
 * Połączenie GUI z logiką klas Task i TaskManager.
 
-Tydzień 4 (do 25.11) – Funkcjonalności Sortowania i Widok Tygodniowy
+Tydzień 4 (do 25.11) – Funkcjonalności Sortowania i Widok Tygodniowy  
 * Dodanie opcji sortowania zadań według priorytetu i terminu.
 * Implementacja widoku tygodniowego w GUI, aby pokazywać zadania w podziale na dni tygodnia.
 
-Tydzień 5 (do 02.12) – Zarządzanie Plikami i Przechowywanie Danych
+Tydzień 5 (do 02.12) – Zarządzanie Plikami i Przechowywanie Danych  
 * Implementacja zapisu zadań do pliku (.txt).
 * Testy poprawności zapisu i odczytu danych użytkownika.
 
-Tydzień 6 (do 09.12) – Implementacja Przypomnień i Powiadomień
+Tydzień 6 (do 09.12) – Implementacja Przypomnień i Powiadomień  
 * Stworzenie systemu przypomnień przy użyciu QTimer i sygnałów Qt.
 * Wizualne powiadomienia w GUI dla zadań zbliżających się do terminu wykonania.
 
-Tydzień 7 (do 02.12) – Dodanie Statystyk i Raportów
+Tydzień 7 (do 02.12) – Dodanie Statystyk i Raportów  
 * Implementacja modułu generowania raportów tygodniowych i statystyk (np. liczba ukończonych zadań).
 * Wyświetlanie graficznych analiz w GUI, aby użytkownik mógł ocenić swoją produktywność.
 
-Tydzień 8 (do 09.12) – Optymalizacja GUI i Ulepszenia UX
+Tydzień 8 (do 09.12) – Optymalizacja GUI i Ulepszenia UX  
 * Optymalizacja wyglądu GUI i poprawa UX.
 * Ulepszenie obsługi zdarzeń w GUI, takich jak przyciski szybkiego dostępu do najważniejszych funkcji.
 
-Tydzień 9 (do 13.01) – Testowanie i Poprawki
+Tydzień 9 (do 13.01) – Testowanie i Poprawki  
 * Kompleksowe testy działania aplikacji, naprawa błędów.
 * Optymalizacja kodu i przegląd funkcji pod kątem wydajności.
 
-Tydzień 10 (do 03.02) – Finalizacja i Dokumentacja
+Tydzień 10 (do 03.02) – Finalizacja i Dokumentacja  
 * Przygotowanie dokumentacji dla użytkowników końcowych i instrukcji instalacji.
 * Dokończenie repozytorium GitHub (README, zrzuty ekranu, przykłady użycia).
 * Ostateczne testy i przygotowanie aplikacji do prezentacji.
 
 ---
 
-INSTALACJA I URUCHOMIENIE 
-Wymagania
+INSTALACJA I URUCHOMIENIE   
+Wymagania  
 * Qt6
 * CMake >= 3.16
 * Kompilator obsługujący C++17
 
-Kroki instalacji  
+Kroki instalacji    
 Sklonuj repozytorium:
 ```bash
 git clone https://github.com/user/PlanMaster.git
